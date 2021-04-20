@@ -1,13 +1,23 @@
 plugins {
   id 'java'
 }
-
 group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
   mavenCentral()
 }
+
+task fatJar(type: Jar) {
+  manifest {
+    attributes 'Implementation-Title': 'utec-dashboard',
+        'Implementation-Version': '0.1',
+        'Main-Class': 'utec.dashboard.api.Init'
+  }
+  from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+  with jar
+}
+
 
 dependencies {
   /**********************************************
@@ -28,4 +38,6 @@ test {
   useJUnitPlatform()
 }
 
-task stage(dependsOn: ['clean', 'compileJava', 'processResources', 'classes'])
+task stage(
+    dependsOn: ['clean', 'build', 'fatJar']
+)
