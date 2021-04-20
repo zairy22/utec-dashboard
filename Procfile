@@ -1,1 +1,1 @@
-web: java -jar build/libs/Backend-1.0-SNAPSHOT.jar
+web: java -jar build/libs/Backend-1.0.0.jar
