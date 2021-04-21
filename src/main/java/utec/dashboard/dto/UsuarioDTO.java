@@ -1,6 +1,6 @@
 package utec.dashboard.dto;
 
-public class Usuario {
+public class UsuarioDTO {
     private int id;
     private String nombre;
     private String usuario;
@@ -47,7 +47,7 @@ public class Usuario {
         this.tipo = tipo;
     }
 
-    public Usuario(int id, String nombre, String usuario, String codigoEmpleado, int tipo) {
+    public UsuarioDTO(int id, String nombre, String usuario, String codigoEmpleado, int tipo) {
         this.id = id;
         this.nombre = nombre;
         this.usuario = usuario;

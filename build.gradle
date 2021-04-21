@@ -25,6 +25,8 @@ dependencies {
   compile "com.sparkjava:spark-core:2.9.3"    //  Microframework para crear microservicios
   compile "org.slf4j:slf4j-simple:1.6.1"      //  Libreria para generar Loggs
   compile "mysql:mysql-connector-java:8.0.22" //  Driver JDBC para MySQL
+  compile 'com.google.code.gson:gson:2.7'   //  Parsear objetos a JSON
+
 
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'

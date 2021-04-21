@@ -1,28 +1,35 @@
 package utec.dashboard.dta;
 
 import utec.dashboard.bd.Conexion;
+import utec.dashboard.dto.UsuarioDTO;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
-public class Usuario {
+public class UsuarioDAO {
     Connection conexion = Conexion.getConexion();
     CallableStatement runSp = null;
 
-    public String logearUsuarios(String usuario, String clave) {
+    public UsuarioDTO logearUsuarios(String usuario, String clave) {
         try {
-            String out = "";
             runSp = conexion.prepareCall("{CALL spValidarUsuario(?, ?)}");
             runSp.setString(1, usuario);
             runSp.setString(2, clave);
             ResultSet datos = runSp.executeQuery();
-            while (datos.next()) {
-                out = datos.getString(2) + " " + datos.getString(5);
+            if (datos.next()) {
+                UsuarioDTO user = new UsuarioDTO(
+                        datos.getInt(1),
+                        datos.getString(2),
+                        datos.getString(3),
+                        datos.getString(4),
+                        datos.getInt(6)
+                );
+                datos.close();
+                return user;
             }
-            datos.close();
-            return out;
-        } catch (Exception ex){
+            return null;
+        } catch (Exception ex) {
             ex.printStackTrace();
             throw new RuntimeException("Imposible ejecutar el spValidarUsuario.");
         }
