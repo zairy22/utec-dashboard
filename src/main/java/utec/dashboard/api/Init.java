@@ -1,18 +1,16 @@
 package utec.dashboard.api;
 
 import utec.dashboard.dta.UsuarioDAO;
-import utec.dashboard.dto.UsuarioDTO;
 import utec.dashboard.utils.JsonTransformer;
 
-import static spark.Spark.get;
-import static spark.Spark.port;
+import static spark.Spark.*;
 
 public class Init {
     public static void main(String[] args) {
         UsuarioDAO user = new UsuarioDAO();
         port(getHerokuAssignedPort());
 
-        get("/validarUsuario", (req, res) -> {
+        post("/validarUsuario", (req, res) -> {
             return user.logearUsuarios(req.queryParams("user"), req.queryParams("pwd"));
         }, new JsonTransformer());
     }
